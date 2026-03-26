@@ -18,4 +18,18 @@ public class AttendanceManager {
     public List<Student> getAllStudents() {
         return this.students;
     }
+
+    public void markAttendance(String studentId, boolean isPresent) {
+        for (Student student : students) {
+            if (student.getId().equals(studentId)) {
+                if (isPresent) {
+                    student.markPresent();
+                } else {
+                    student.markAbsent();
+                }
+                return;
+            }
+        }
+        System.out.println("Student with ID " + studentId + " not found.");
+    }
 }
