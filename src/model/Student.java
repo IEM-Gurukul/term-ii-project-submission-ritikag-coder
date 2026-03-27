@@ -26,4 +26,11 @@ public class Student extends Person {
     public void markAbsent() {
         this.totalClasses++;
     }
+
+    public double calculateAttendance() {
+        if (totalClasses == 0) {
+            return 0.0;
+        }
+        return ((double) presentCount / totalClasses) * 100.0;
+    }
 }
