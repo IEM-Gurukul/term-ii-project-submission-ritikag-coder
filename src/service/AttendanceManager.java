@@ -32,4 +32,23 @@ public class AttendanceManager {
         }
         System.out.println("Student with ID " + studentId + " not found.");
     }
+
+    public Student searchById(String id) {
+        for (Student student : students) {
+            if (student.getId().equals(id)) {
+                return student;
+            }
+        }
+        return null;
+    }
+
+    public List<Student> searchByName(String name) {
+        List<Student> result = new ArrayList<>();
+        for (Student student : students) {
+            if (student.getName().equalsIgnoreCase(name)) {
+                result.add(student);
+            }
+        }
+        return result;
+    }
 }
