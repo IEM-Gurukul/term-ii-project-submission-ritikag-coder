@@ -18,6 +18,14 @@ public class Student extends Person {
         return presentCount;
     }
 
+    public void setTotalClasses(int totalClasses) {
+        this.totalClasses = totalClasses;
+    }
+
+    public void setPresentCount(int presentCount) {
+        this.presentCount = presentCount;
+    }
+
     public void markPresent() {
         this.totalClasses++;
         this.presentCount++;
