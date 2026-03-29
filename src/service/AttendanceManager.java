@@ -62,9 +62,9 @@ public class AttendanceManager {
         for (Student student : students) {
             double attendance = student.calculateAttendance();
             if (attendance < 75.0) {
-                System.out.println("Warning: Student " + student.getName() + 
-                                   " (ID: " + student.getId() + ") " +
-                                   "has low attendance: " + String.format("%.2f", attendance) + "%");
+                System.out.println("Warning: Student " + student.getName() +
+                        " (ID: " + student.getId() + ") " +
+                        "has low attendance: " + String.format("%.2f", attendance) + "%");
             }
         }
     }

@@ -9,7 +9,7 @@ public class Main {
         AttendanceManager manager = new AttendanceManager();
         Scanner scanner = new Scanner(System.in);
         String FILENAME = "students_data.csv";
-        
+
         System.out.println("Trying to load existing data...");
         manager.loadDataFromFile(FILENAME);
 
@@ -20,9 +20,9 @@ public class Main {
             System.out.println("3. View Reports");
             System.out.println("4. Exit");
             System.out.print("Enter your choice: ");
-            
+
             String choice = scanner.nextLine();
-            
+
             switch (choice) {
                 case "1":
                     System.out.print("Enter Student ID: ");
@@ -46,11 +46,18 @@ public class Main {
                     }
                     break;
                 case "3":
-                    System.out.println("\n--- Attendance Reports ---");
+                    System.out.println("\n--- Detailed Attendance Reports ---");
+                    System.out.println("-------------------------------------------------------------------");
+                    System.out.printf("%-10s | %-20s | %-13s | %-13s | %-10s\n", 
+                                      "ID", "Name", "Total Classes", "Present Count", "Attendance");
+                    System.out.println("-------------------------------------------------------------------");
                     for (Student student : manager.getAllStudents()) {
-                        System.out.printf("ID: %s | Name: %s | Attendance: %.2f%%\n",
-                                student.getId(), student.getName(), student.calculateAttendance());
+                        System.out.printf("%-10s | %-20s | %-13d | %-13d | %.2f%%\n",
+                                student.getId(), student.getName(), 
+                                student.getTotalClasses(), student.getPresentCount(), 
+                                student.calculateAttendance());
                     }
+                    System.out.println("-------------------------------------------------------------------");
                     manager.displayLowAttendanceWarning();
                     break;
                 case "4":
