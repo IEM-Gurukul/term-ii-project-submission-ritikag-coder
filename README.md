@@ -46,13 +46,19 @@ structured and reliable solution to track, analyze, and manage student attendanc
 ## OOP Concepts Used
 
 • Abstraction: Separate layers for model, service, data access, and user interaction.
+
 • Encapsulation: Student and AttendanceRecord classes maintain private attributes accessed through public getters
 and setters.
+
 • Inheritance: A base Person class defines shared attributes such as ID and name, while Student extends it with
 attendance-related properties.
+
 • Polymorphism: Methods such as displayInfo() can be overridden to present attendance data in different formats.
+
 • Exception Handling: Manage invalid student IDs, missing records, and input errors gracefully.
+
 • Collections: Dynamic structures such as ArrayList manage student objects efficiently. 
+
 ---
 
 ## Proposed Architecture Description
@@ -73,8 +79,11 @@ The menu-driven system will start.
 
 Follow on-screen options:
 1)Add Student
+
 2)Mark Attendance
+
 3)View Reports
+
 4)Exit
 
 Data will be automatically saved and loaded from file.
