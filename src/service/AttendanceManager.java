@@ -105,7 +105,7 @@ public class AttendanceManager {
     public void saveDataToFile(String filename) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename))) {
             for (Student s : students) {
-                bw.write(s.getId() + "," + s.getName() + "," + s.getTotalClasses() + "," + s.getPresentCount());
+                bw.write(s.getId() + "," + s.getName() + "," + s.getTotalClasses() + "," + s.getPresentCount() + "," + s.getLateCount());
                 bw.newLine();
             }
             System.out.println("Data saved successfully.");
@@ -115,16 +115,29 @@ public class AttendanceManager {
     }
 
     public void loadDataFromFile(String filename) {
+        java.io.File file = new java.io.File(filename);
+        if (!file.exists()) {
+            System.out.println("Info: Data file not found. Starting with empty database.");
+            return;
+        }
+
         this.students.clear();
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
-                if (parts.length == 4) {
-                    Student s = new Student(parts[0], parts[1]);
-                    s.setTotalClasses(Integer.parseInt(parts[2]));
-                    s.setPresentCount(Integer.parseInt(parts[3]));
-                    this.students.add(s);
+                if (parts.length >= 4) {
+                    try {
+                        Student s = new Student(parts[0], parts[1]);
+                        s.setTotalClasses(Integer.parseInt(parts[2]));
+                        s.setPresentCount(Integer.parseInt(parts[3]));
+                        if (parts.length >= 5) {
+                            s.setLateCount(Integer.parseInt(parts[4]));
+                        }
+                        this.students.add(s);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Warning: Skipping corrupted line -> " + line);
+                    }
                 }
             }
             System.out.println("Data loaded successfully.");

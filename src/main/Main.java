@@ -26,9 +26,21 @@ public class Main {
             switch (choice) {
                 case "1":
                     System.out.print("Enter Student ID: ");
-                    String id = scanner.nextLine();
+                    String id = scanner.nextLine().trim();
+                    if (id.isEmpty()) {
+                        System.out.println("Error: Student ID cannot be empty.");
+                        break;
+                    }
+                    if (manager.searchById(id) != null) {
+                        System.out.println("Error: Student with ID '" + id + "' already exists.");
+                        break;
+                    }
                     System.out.print("Enter Student Name: ");
-                    String name = scanner.nextLine();
+                    String name = scanner.nextLine().trim();
+                    if (name.isEmpty()) {
+                        System.out.println("Error: Student Name cannot be empty.");
+                        break;
+                    }
                     manager.addStudent(new Student(id, name));
                     System.out.println("Student added successfully.");
                     break;
