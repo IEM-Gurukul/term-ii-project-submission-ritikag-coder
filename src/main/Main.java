@@ -37,10 +37,15 @@ public class Main {
                     String attId = scanner.nextLine();
                     Student s = manager.searchById(attId);
                     if (s != null) {
-                        System.out.print("Is student present? (y/n): ");
-                        String present = scanner.nextLine();
-                        manager.markAttendance(attId, present.equalsIgnoreCase("y"));
-                        System.out.println("Attendance marked.");
+                        System.out.print("Enter Date (YYYY-MM-DD, press enter for today): ");
+                        String date = scanner.nextLine();
+                        if (date.trim().isEmpty()) {
+                            date = java.time.LocalDate.now().toString();
+                        }
+                        System.out.print("Enter attendance status (P for Present / A for Absent / L for Late): ");
+                        String status = scanner.nextLine();
+                        manager.markAttendance(attId, date, status);
+                        System.out.println("Attendance marking processed.");
                     } else {
                         System.out.println("Student not found.");
                     }

@@ -24,13 +24,32 @@ public class AttendanceManager {
         return this.students;
     }
 
-    public void markAttendance(String studentId, boolean isPresent) {
+    public void markAttendance(String studentId, String date, String status) {
         for (Student student : students) {
             if (student.getId().equals(studentId)) {
-                if (isPresent) {
+                boolean valid = false;
+                if (status.equalsIgnoreCase("p") || status.equalsIgnoreCase("present")) {
                     student.markPresent();
-                } else {
+                    valid = true;
+                } else if (status.equalsIgnoreCase("a") || status.equalsIgnoreCase("absent")) {
                     student.markAbsent();
+                    valid = true;
+                } else if (status.equalsIgnoreCase("l") || status.equalsIgnoreCase("late")) {
+                    student.markLate();
+                    valid = true;
+                } else {
+                    System.out.println("Invalid status provided. Please use P, A, or L.");
+                    return;
+                }
+                
+                if (valid) {
+                    try (java.io.FileWriter fw = new java.io.FileWriter("attendance_log.txt", true);
+                         java.io.BufferedWriter bw = new java.io.BufferedWriter(fw)) {
+                        bw.write(date + " | ID: " + studentId + " | Name: " + student.getName() + " | Status: " + status.toUpperCase());
+                        bw.newLine();
+                    } catch (java.io.IOException e) {
+                        System.out.println("Warning: Failed to write to attendance_log.txt");
+                    }
                 }
                 return;
             }
