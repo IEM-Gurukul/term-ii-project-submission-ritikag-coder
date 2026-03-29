@@ -26,12 +26,19 @@ structured and reliable solution to track, analyze, and manage student attendanc
 
 ## Core Features
 • Student Record Management: Add and manage student profiles with unique identifiers.
+
 • Attendance Logging: Mark attendance (Present / Absent) for students on specific dates or sessions.
+
 • Attendance Percentage Calculation: Automatically calculate attendance percentages for each student.
+
 • Search Student Feature: Quickly search for students by ID or name.
+
 • Low Attendance Warning: Display alerts when a student's attendance falls below a defined threshold (e.g., 75%).
+
 • Attendance Reports: Generate summaries showing attendance statistics for individual students or the entire class.
+
 • Data Persistence: Store and retrieve attendance records to maintain data between system sessions.
+
 • Input Validation: Handle invalid inputs and ensure data consistency during operations
 
 ---
@@ -65,10 +72,10 @@ In terminal
 The menu-driven system will start.
 
 Follow on-screen options:
-Add Student
-Mark Attendance
-View Reports
-Exit
+1)Add Student
+2)Mark Attendance
+3)View Reports
+4)Exit
 
 Data will be automatically saved and loaded from file.
 
