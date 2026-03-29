@@ -58,15 +58,29 @@ public class AttendanceManager {
     }
 
     public void displayLowAttendanceWarning() {
-        System.out.println("--- Low Attendance Warning (< 75%) ---");
+
+        System.out.println("      CRITICAL: LOW ATTENDANCE ALERTS     ");
+
+        boolean hasWarnings = false;
         for (Student student : students) {
             double attendance = student.calculateAttendance();
-            if (attendance < 75.0) {
-                System.out.println("Warning: Student " + student.getName() +
-                        " (ID: " + student.getId() + ") " +
-                        "has low attendance: " + String.format("%.2f", attendance) + "%");
+            if (student.getTotalClasses() > 0 && attendance < 75.0) {
+                hasWarnings = true;
+                int requiredClasses = (int) Math
+                        .ceil((0.75 * student.getTotalClasses() - student.getPresentCount()) / 0.25);
+                System.out.printf("[!] %s (ID: %s) currently at %.2f%%\n", student.getName(), student.getId(),
+                        attendance);
+                if (requiredClasses > 0) {
+                    System.out.printf(
+                            "    Action mapping -> Needs to attend %d more consecutive class(es) to reach 75%%.\n",
+                            requiredClasses);
+                }
             }
         }
+        if (!hasWarnings) {
+            System.out.println("[+] All active students are currently above 75% attendance.");
+        }
+        System.out.println("==========================================\n");
     }
 
     public void saveDataToFile(String filename) {
